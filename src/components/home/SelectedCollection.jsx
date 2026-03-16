@@ -20,7 +20,7 @@ export default function SelectedCollection() {
 
   return (
     <header>
-      {data ? (
+      {data !== null ? (
         <div className="selected-collection">
           <video
             autoPlay
