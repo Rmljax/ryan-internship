@@ -42,7 +42,7 @@ export default function NewCollections() {
                 480: { slidesPerView: 2 },
               }}
             >
-              {null
+              {collections.length > 0
                 ? collections.map((collection, index) => (
                     <SwiperSlide key={index} className="collection-column">
                       <Link
