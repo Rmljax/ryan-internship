@@ -582,6 +582,22 @@ html {
   font-weight: 600;
   line-height: 24px;
 }
+.swiper-button-next {
+  border-radius: 9999px;
+  background: white;
+  color: black;
+  padding: 8px;
+  height: 40px;
+  width: 40px;
+}
+.swiper-button-prev {
+  border-radius: 9999px;
+  background: white;
+  color: black;
+  padding: 8px;
+  height: 40px;
+  width: 40px;
+}
 
 /* Footer */
 
