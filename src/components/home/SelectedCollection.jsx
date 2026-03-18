@@ -34,7 +34,10 @@ export default function SelectedCollection() {
           <div className="selected-collection__description">
             <img src={data.logo} alt="" className="selected-collection__logo" />
             <h1 className="selected-collection__title">{data.title}</h1>
-            <Link to={"/user"} className="selected-collection__author">
+            <Link
+              to={`/user/${data.creatorId}`}
+              className="selected-collection__author"
+            >
               By {data.creator}
               <img
                 src={VerifiedIcon}
@@ -44,7 +47,10 @@ export default function SelectedCollection() {
             <div className="selected-collection__details">
               {data.amountOfItems} items · {data.floorPrice} ETH
             </div>
-            <Link to={"/collection"} className="selected-collection__button">
+            <Link
+              to={`/collection/${data.collectionId}`}
+              className="selected-collection__button"
+            >
               <div className="green-pulse"></div>
               View Collection
             </Link>
