@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/bundle";
 
-import { A11y, Navigation, Pagination, Scrollbar } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import Skeleton from "../ui/Skeleton";
 
 export default function NewCollections() {
