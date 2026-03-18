@@ -1,45 +1,107 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SelectedCollection from "../components/home/SelectedCollection";
 import { Link } from "react-router-dom";
+import Collection from "../components/ui/Collection";
+import axios from "axios";
+import Skeleton from "../components/ui/Skeleton";
 
 export default function CollectionsPage() {
+  const [collections, setCollections] = useState([]);
+  const [numShown, setNumShown] = useState(12);
+  const [loadVisible, setLoadVisible] = useState(true);
+
+  async function fetchData() {
+    const { data } = await axios.get(
+      "https://remote-internship-api-production.up.railway.app/collections",
+    );
+
+    setCollections(data.data);
+  }
+
   useEffect(() => {
+    fetchData();
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    if (collections.length > 1 && numShown >= collections.length) {
+      setLoadVisible(false);
+    }
+  }, [numShown]);
 
   return (
     <div className="container">
       <div className="row">
         <h1 className="collections-page__title">Collections</h1>
         <div className="collections__body">
-          {new Array(12).fill(0).map((_, index) => (
-            <div className="collection-column">
-              <Link to="/collection" key={index} className="collection">
-                <img
-                  src="https://i.seadn.io/gcs/files/a5414557ae405cb6233b4e2e4fa1d9e6.jpg?auto=format&dpr=1&w=1920"
-                  alt=""
-                  className="collection__img"
-                />
-                <div className="collection__info">
-                  <h3 className="collection__name">Bored Ape Kennel Club</h3>
-                  <div className="collection__stats">
-                    <div className="collection__stat">
-                      <span className="collection__stat__label">Floor</span>
-                      <span className="collection__stat__data">0.46 ETH</span>
-                    </div>
-                    <div className="collection__stat">
-                      <span className="collection__stat__label">
-                        Total Volume
-                      </span>
-                      <span className="collection__stat__data">281K ETH</span>
+          {collections.length > 0
+            ? collections.slice(0, numShown).map((collection, index) => (
+                <div className="collection-column">
+                  <Collection key={index} collection={collection} />
+                </div>
+              ))
+            : new Array(12).fill().map((_, index) => (
+                <div className="collection-column">
+                  <div className="collection">
+                    <Skeleton
+                      key={index}
+                      width="100%"
+                      height="180px"
+                      borderRadius="0"
+                    />
+                    <div className="collection__info">
+                      <div
+                        className="collection__stats"
+                        style={{ marginTop: "16px" }}
+                      >
+                        <div
+                          className="collection__stat"
+                          style={{ gap: "8px" }}
+                        >
+                          <Skeleton
+                            key={index}
+                            width="40%"
+                            height="14px"
+                            borderRadius="4px"
+                          />
+                          <Skeleton
+                            key={index}
+                            width="80%"
+                            height="14px"
+                            borderRadius="4px"
+                          />
+                        </div>
+                        <div
+                          className="collection__stat"
+                          style={{ gap: "8px" }}
+                        >
+                          <Skeleton
+                            key={index}
+                            width="40%"
+                            height="14px"
+                            borderRadius="4px"
+                          />
+                          <Skeleton
+                            key={index}
+                            width="80%"
+                            height="14px"
+                            borderRadius="4px"
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </Link>
-            </div>
-          ))}
+              ))}
         </div>
-        <button className="collections-page__button">Load more</button>
+        {loadVisible ? (
+          <button
+            className="collections-page__button"
+            onClick={() => setNumShown((prev) => prev + 6)}
+          >
+            Load more
+          </button>
+        ) : null}
       </div>
     </div>
   );
