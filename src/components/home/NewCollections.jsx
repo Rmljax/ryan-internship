@@ -1,11 +1,12 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/bundle";
 
 import { Navigation } from "swiper/modules";
 import Skeleton from "../ui/Skeleton";
+import Collection from "../ui/Collection";
 
 export default function NewCollections() {
   const [collections, setCollections] = useState([]);
@@ -18,7 +19,7 @@ export default function NewCollections() {
     setCollections(data.data);
   }
 
-  useState(() => {
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -45,40 +46,7 @@ export default function NewCollections() {
               {collections.length > 0
                 ? collections.map((collection, index) => (
                     <SwiperSlide key={index} className="collection-column">
-                      <Link
-                        to={`/collection/${collection.collectionId}`}
-                        key={index}
-                        className="collection"
-                      >
-                        <img
-                          src={collection.imageLink}
-                          alt=""
-                          className="collection__img"
-                        />
-                        <div className="collection__info">
-                          <h3 className="collection__name">
-                            {collection.title}
-                          </h3>
-                          <div className="collection__stats">
-                            <div className="collection__stat">
-                              <span className="collection__stat__label">
-                                Floor
-                              </span>
-                              <span className="collection__stat__data">
-                                {Number(collection.floor).toFixed(2)} ETH
-                              </span>
-                            </div>
-                            <div className="collection__stat">
-                              <span className="collection__stat__label">
-                                Total Volume
-                              </span>
-                              <span className="collection__stat__data">
-                                {collection.totalVolume} ETH
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </Link>
+                      <Collection key={index} collection={collection} />
                     </SwiperSlide>
                   ))
                 : new Array(7).fill().map((_, index) => (
