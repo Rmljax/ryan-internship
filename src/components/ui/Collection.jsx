@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 
 export default function Collection({ collection }) {
   return (
-    <Link to={`/collection/${collection.collectionId}`} className="collection">
+    <Link
+      to={`/collection/${collection.collectionId ? collection.collectionId : collection.id}`}
+      className="collection"
+    >
       <img src={collection.imageLink} alt="" className="collection__img" />
       <div className="collection__info">
         <h3 className="collection__name">{collection.title}</h3>
