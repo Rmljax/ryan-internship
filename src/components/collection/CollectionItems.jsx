@@ -48,7 +48,7 @@ export default function CollectionItems({ items, setItems }) {
               onChange={(event) => setSort(event.target.value)}
             >
               <option value="" disabled>
-                Sort
+                Default
               </option>
               <option value="HIGH_TO_LOW">Price high to low</option>
               <option value="LOW_TO_HIGH">Price low to high</option>
