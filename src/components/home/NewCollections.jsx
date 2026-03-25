@@ -6,10 +6,12 @@ import "swiper/css/bundle";
 import { Navigation } from "swiper/modules";
 import Skeleton from "../ui/Skeleton";
 import Collection from "../ui/Collection";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function NewCollections() {
   const [collections, setCollections] = useState([]);
-
+  AOS.init();
   async function fetchData() {
     const { data } = await axios.get(
       "https://remote-internship-api-production.up.railway.app/newCollections",
@@ -26,8 +28,19 @@ export default function NewCollections() {
     <section id="new-collections">
       <div className="container">
         <div className="row">
-          <h2 className="new-collections__title">New Collections</h2>
-          <div className="new-collections__body">
+          <h2
+            className="new-collections__title"
+            data-aos="fade-up"
+            data-aos-duration="600"
+          >
+            New Collections
+          </h2>
+          <div
+            className="new-collections__body"
+            data-aos="fade-up"
+            data-aos-delay="100"
+            data-aos-duration="600"
+          >
             <Swiper
               modules={[Navigation]}
               spaceBetween={16}

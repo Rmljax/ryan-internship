@@ -4,6 +4,8 @@ import TrendingCollection from "../../assets/trending-collection.avif";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Skeleton from "../ui/Skeleton";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function Trending() {
   const [trending, setTrending] = useState([]);
@@ -18,6 +20,7 @@ export default function Trending() {
   useEffect(() => {
     fetchData();
   }, []);
+  AOS.init();
 
   return (
     <section id="trending">
@@ -29,7 +32,12 @@ export default function Trending() {
               View All
             </Link>
           </div>
-          <div className="trending__body">
+          <div
+            className="trending__body"
+            data-aos="fade-up"
+            data-aos-delay="100"
+            data-aos-duration="600"
+          >
             <div className="trending-column">
               <div className="trending-column__header">
                 <div className="trending-column__header__rank">#</div>

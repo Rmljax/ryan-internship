@@ -3,14 +3,15 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/bundle";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { Navigation } from "swiper/modules";
 import Skeleton from "../ui/Skeleton";
 import Collection from "../ui/Collection";
 
 export default function PopularCollections() {
   const [collections, setCollections] = useState([]);
-
+  AOS.init();
   async function fetchData() {
     const { data } = await axios.get(
       "https://remote-internship-api-production.up.railway.app/popularCollections",
@@ -27,8 +28,19 @@ export default function PopularCollections() {
     <section id="popular-collections">
       <div className="container">
         <div className="row">
-          <h2 className="popular-collections__title">Popular Collections</h2>
-          <div className="popular-collections__body">
+          <h2
+            className="popular-collections__title"
+            data-aos="fade-up"
+            data-aos-duration="600"
+          >
+            Popular Collections
+          </h2>
+          <div
+            className="popular-collections__body"
+            data-aos="fade-up"
+            data-aos-delay="100"
+            data-aos-duration="600"
+          >
             <Swiper
               modules={[Navigation]}
               spaceBetween={16}
