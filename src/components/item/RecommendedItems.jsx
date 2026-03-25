@@ -14,9 +14,7 @@ export default function RecommendedItems({
   setFilteredItems,
   currentId,
 }) {
-  useEffect(() => {
-    setFilteredItems(items.filter((item) => item.itemId !== currentId));
-  }, []);
+  
   return (
     <section id="recommended-items">
       <div className="container">
@@ -44,7 +42,7 @@ export default function RecommendedItems({
                     480: { slidesPerView: 2 },
                   }}
                 >
-                  {items?.slice(0, 10).map((item, index) => (
+                  {items.filter((item) => item.itemId !== currentId).slice(0, 10).map((item, index) => (
                     <SwiperSlide key={index} className="item-column">
                       <Link
                         to={`/item/${item.itemId}`}
